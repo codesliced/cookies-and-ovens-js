@@ -55,6 +55,11 @@ $(document).ready(function() {
     moveFromPrepToOven(preppedCookieId);
     $(this).closest('li').remove();
     displayOvenData();
+  });
 
+  $('#bake').click(function() {
+    Oven.bakeCookies();
+    displayOvenData();
+    console.log(Oven.cookies);
   });
 });

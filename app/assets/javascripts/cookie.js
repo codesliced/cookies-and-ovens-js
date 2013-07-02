@@ -19,7 +19,7 @@ Cookie.prototype = {
     } else {
       return "raw";
     }
-    return this.state;
+    // return this.state;
   }
 };
 
