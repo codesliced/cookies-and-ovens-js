@@ -2,6 +2,7 @@ function Cookie(type, bakeTime) {
   this.type = type;
   this.bakeTime = bakeTime;
   this.timeInOven = 0;
+  this.timeStamp = Date.now();
 }
 
 Cookie.prototype = {
@@ -10,16 +11,17 @@ Cookie.prototype = {
     this.getState();
   },
   getState: function() {
-    if (this.timeInOven < this.bakeTime) {
-      this.state = "still gooey";
+    if (this.timeInOven < 1) {
+      return "raw";
+    } else if (this.timeInOven < this.bakeTime) {
+      return "still gooey";
     } else if (this.timeInOven === this.bakeTime) {
-      this.state = "just right";
+      return "just right";
     } else if (this.timeInOven > this.bakeTime) {
-      this.state = "crispy";
+      return "crispy";
     } else {
-      this.state = "raw";
+      return "something is wrong...";
     }
-    return this.state;
   }
 };
 
