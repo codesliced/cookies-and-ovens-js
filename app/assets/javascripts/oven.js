@@ -10,3 +10,12 @@ var Oven = {
     }
   }
 };
+
+var displayOvenData = function(){
+  $('#oven').empty();
+  for (var i = 0; i < Oven.cookies.length; i++) {
+    var cookie = Oven.cookies[i];
+    var ovenRowTemplate = "<tr><td class='" + cookie.getState() + "'>" + cookie.type+ " <span class='status'>[" + cookie.getState() + "]</span></td></tr>";
+    $('#oven').append(ovenRowTemplate);
+  }
+}; 
