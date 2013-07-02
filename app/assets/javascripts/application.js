@@ -31,7 +31,6 @@ $(document).ready(function() {
       var ovenRowTemplate = "<tr><td class='" + cookie.getState() + "'>" + cookie.type+ " <span class='status'>[" + cookie.getState() + "]</span></td></tr>";
       $('#oven').append(ovenRowTemplate);
     }
-     // console.log(ovenRowTemplate);
   }; 
 
   $('#new_batch').submit(function(event) {

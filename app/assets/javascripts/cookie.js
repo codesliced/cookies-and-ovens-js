@@ -14,9 +14,9 @@ Cookie.prototype = {
     if (this.timeInOven < 1) {
       return "raw";
     } else if (this.timeInOven < this.bakeTime) {
-      return "still gooey";
-    } else if (this.timeInOven === this.bakeTime) {
-      return "just right";
+      return "still_gooey";
+    } else if (this.timeInOven == this.bakeTime) {
+      return "just_right";
     } else if (this.timeInOven > this.bakeTime) {
       return "crispy";
     } else {
