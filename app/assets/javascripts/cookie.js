@@ -11,13 +11,13 @@ Cookie.prototype = {
   },
   getState: function() {
     if (this.timeInOven < this.bakeTime) {
-      this.state = "still gooey";
+      return "still gooey";
     } else if (this.timeInOven === this.bakeTime) {
-      this.state = "just right";
+      return "just right";
     } else if (this.timeInOven > this.bakeTime) {
-      this.state = "crispy";
+      return "crispy";
     } else {
-      this.state = "raw";
+      return "raw";
     }
     return this.state;
   }
