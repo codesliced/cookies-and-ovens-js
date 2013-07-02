@@ -17,6 +17,22 @@
 
 $(document).ready(function() {
   var prepTable = new PrepTable();
+  var moveFromPrepToOven = function(preppedCookieId){
+    for (var i = 0; i < prepTable.batch.length; i++) {
+      if (prepTable.batch[i].timeStamp === parseInt(preppedCookieId)) {
+        Oven.cookies.push(prepTable.batch[i]);
+      }
+    };  
+  }
+  var displayOvenData = function(){
+    $('#oven').empty();
+    for (var i = 0; i < Oven.cookies.length; i++) {
+      var cookie = Oven.cookies[i];
+      var ovenRowTemplate = "<tr><td class='" + cookie.getState() + "'>" + cookie.type+ " <span class='status'>[" + cookie.getState() + "]</span></td></tr>";
+      $('#oven').append(ovenRowTemplate);
+    }
+     // console.log(ovenRowTemplate);
+  }; 
 
   $('#new_batch').submit(function(event) {
     event.preventDefault();
@@ -26,26 +42,19 @@ $(document).ready(function() {
     $('input[name=batch_type]').val(""); 
     $('input[name=bake_time]').val(""); 
 
-    var row = "<li><span class='cookie_type'>" + type + "</span><button class='add_to_oven'>Add to oven</button></li>";
-    $("#prep_batches").append(row);
-
     var cookie = new Cookie(type, time);
     prepTable.addCookie(cookie);
+
+    var row = "<li><span id='" + cookie.timeStamp + "'>" + type + "</span><button class='add_to_oven'>Add to oven</button></li>";
+    $("#prep_batches").append(row);
   });
 
   $('body').on('click', '.add_to_oven', function(response) {
     var cookieType = $(this).closest('li').find('span').html();
-    if ($('#rack_0').html() === "[empty]") {
-      $('#rack_0').html(cookieType);
-      $(this).closest('li').remove();
-    } else if ($('#rack_1').html() === "[empty]") {
-      $('#rack_1').html(cookieType);
-      $(this).closest('li').remove();
-    } else if ($('#rack_2').html() === "[empty]") {
-      $('#rack_2').html(cookieType);
-      $(this).closest('li').remove();
-    } else {
-      alert("The oven is full, fool! Start baking already.")
-    }
+    var preppedCookieId = ($(this).closest('li').find('span').attr('id'));
+    moveFromPrepToOven(preppedCookieId);
+    $(this).closest('li').remove();
+    displayOvenData();
+
   });
 });
