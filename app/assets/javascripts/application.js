@@ -11,8 +11,8 @@ $(document).ready(function() {
     var cookie = new Cookie(type, time);
 
     PrepTable.addCookie(cookie);
-    PrepTable.addRow(cookie);
-    PrepTable.clearForm();
+    addRow(cookie);
+    clearForm();
   });
 
   $('body').on('click', '.add_to_oven', function(response) {
@@ -30,3 +30,22 @@ $(document).ready(function() {
     displayOvenData();
   });
 });
+
+
+var addRow = function(cookie) {
+  var prepTableRow = "<li><span id='" + cookie.timeStamp + "'>" + cookie.type + "</span><button class='add_to_oven'>Add to oven</button></li>";
+  $("#prep_batches").append(prepTableRow);
+};
+var clearForm = function(){
+  $('input[name=batch_type]').val(""); 
+  $('input[name=bake_time]').val(""); 
+};
+
+var displayOvenData = function(){
+  $('#oven').empty();
+  for (var i = 0; i < Oven.cookies.length; i++) {
+    var cookie = Oven.cookies[i];
+    var ovenRowTemplate = "<tr><td class='" + cookie.getState() + "'>" + cookie.type+ " <span class='status'>[" + cookie.getState() + "]</span></td></tr>";
+    $('#oven').append(ovenRowTemplate);
+  }
+}; 

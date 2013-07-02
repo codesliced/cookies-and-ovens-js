@@ -1,14 +1,18 @@
 function Cookie(type, bakeTime) {
   this.type = type;
-  this.bakeTime = bakeTime;
+  this.bakeTime = parseInt(bakeTime);
   this.timeInOven = 0;
   this.timeStamp = Date.now();
+
+  if (isNaN(this.bakeTime)) {
+    throw new Error("bakeTime must be a number");
+  }
 }
 
 Cookie.prototype = {
   bake: function() {
-    this.timeInOven ++;
-    this.getState();
+    this.timeInOven++;
+    return this.getState();
   },
   getState: function() {
     if (this.timeInOven < 1) {
