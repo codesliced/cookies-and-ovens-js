@@ -4,6 +4,7 @@ function PrepTable() {
 
 PrepTable.prototype.addCookie = function(cookie){
   this.batch.push(cookie);
+  return this.batch;
 };
 
 
